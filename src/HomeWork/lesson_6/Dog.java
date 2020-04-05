@@ -1,9 +1,13 @@
 package HomeWork.lesson_6;
 
 public class Dog extends Animals {
-    public Dog(String name) {
-        super(name);
-        System.out.println("Мы создали собаку " + name);
+
+    private boolean hungry;
+
+    public Dog(String name, int appetite) {
+        super(name, appetite);
+        this.hungry = true;
+//        System.out.println("Мы создали собаку " + name);
     }
 
     @Override
@@ -28,5 +32,16 @@ public class Dog extends Animals {
             System.out.println(name + " пробежал " + run + " метров");
         else
             System.out.println("Так долго даже собаки не бегают");
+    }
+
+    @Override
+    public void eat(Plate p) {
+        if (hungry && p.decreaseFood(appetite))
+            System.out.println(name + " съел " + appetite);
+        else {
+            hungry = false;
+            System.out.println("Для " + name + " пса нет еды в тарелке");
+        }
+
     }
 }
