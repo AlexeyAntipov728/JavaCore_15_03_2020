@@ -42,7 +42,7 @@ public class Window extends JFrame {
                         if(isEmpty(buttons)){
                             System.out.println("Ничья");
                         }
-                        if(isVictory(buttons)) {
+                        if(isVictory(buttons, imageX)) {
                             System.out.println("WIN WIN WIN WIN");
 
 
@@ -68,6 +68,32 @@ public class Window extends JFrame {
                             alert.setResizable(false);
                             alert.setVisible(true);
                         }
+                    if(isVictory(buttons, imageO)) {
+                        System.out.println("Sad");
+
+
+                        JFrame alert = new JFrame("Победил O");
+                        alert.setLocation(500, 400);
+                        alert.setSize(300, 100);
+                        JPanel alertPanel = new JPanel(new FlowLayout());
+                        JButton newGame = new JButton("Новая игра");
+                        newGame.addActionListener(a -> {
+                            this.dispose();
+                            new Window();
+                            cnt++;
+                            alert.dispose();
+                        });
+                        JButton close = new JButton("Закрыть");
+                        close.addActionListener(a -> {
+                            dispose();
+                            alert.dispose();
+                        });
+                        alertPanel.add(newGame);
+                        alertPanel.add(close);
+                        alert.add(alertPanel);
+                        alert.setResizable(false);
+                        alert.setVisible(true);
+                    }
                     movePC(buttons);
                 });
                 panel.add(buttons[i][j]);
@@ -89,7 +115,7 @@ public class Window extends JFrame {
     }
 
 
-    public boolean isVictory(JButton [][] buttons) {
+    public boolean isVictory(JButton [][] buttons, ImageIcon imageX) {
 
         // Счетчик комбинаций по строке
         int countRow = 0;
