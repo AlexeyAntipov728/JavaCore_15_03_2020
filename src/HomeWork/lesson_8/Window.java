@@ -115,48 +115,6 @@ public class Window extends JFrame {
     }
 
 
-    public boolean isVictory(JButton [][] buttons, ImageIcon imageX) {
-
-        // Счетчик комбинаций по строке
-        int countRow = 0;
-        // Счетчик комбинаций по столбцу
-        int countColumn = 0;
-        // Счетчик комбинаций по первой диагонали
-        int countDiagonal1 = 0;
-        // Счетчик комбинаций по второй диагонали
-        int countDiagonal2 = 0;
-        // Проверка по строкам и столбцам
-        for (int i = 0; i < buttons.length; i++) {
-            for (int j = 0; j < buttons.length; j++) {
-                if (buttons[i][j].getIcon() == imageX) countRow++;
-                if (buttons[j][i].getIcon() == imageX) countColumn++;
-            }
-            if (countRow == 3 || countColumn == 3) {
-                return true;
-            }
-            countRow = 0;
-            countColumn = 0;
-        }
-        // Проверка по первой диагонали
-        for (int i = 0, j = 0; i < buttons.length; i++) {
-            if (buttons[i][j].getIcon() == imageX) countDiagonal1++;
-            j++;
-        }
-        if (countDiagonal1 == 3) {
-            return true;
-        }
-        // Проверка по второй диагонали
-        for (int i = 0, j = 2; i < buttons.length; i++) {
-            if (buttons[i][j].getIcon() == imageX) countDiagonal2++;
-            j--;
-        }
-        if (countDiagonal2 == 3) {
-            return true;
-        }
-        return false;
-
-    }
-
     private void movePC(JButton[][] buttons) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -170,6 +128,34 @@ public class Window extends JFrame {
                 }
             }
         }
+    }
+    private boolean isVictory(@NotNull JButton [][] buttons, ImageIcon imageX) {
+        //Проверка линий по диагоналям
+        boolean rightDiagonal, leftDiagonal;
+        rightDiagonal = true;
+        leftDiagonal = true;
+        for (int i = 0; i < buttons.length; i++) {
+            rightDiagonal &= (buttons[i][i].getIcon() == imageX);
+            leftDiagonal &= (buttons[buttons.length - i - 1][i].getIcon() == imageX);
+        }
+
+        if (rightDiagonal || leftDiagonal)
+            return true;
+        //Проверка столбцов и строк
+        boolean columns, lines;
+        for (int col = 0; col < buttons.length; col++) {
+            columns = true;
+            lines = true;
+            for (int lin = 0; lin < buttons.length; lin++) {
+                columns &= (buttons[col][lin].getIcon() == imageX);
+                lines &= (buttons[lin][col].getIcon() == imageX);
+            }
+
+            if (columns || lines)
+                return true;
+        }
+
+        return false;
     }
 
 }
