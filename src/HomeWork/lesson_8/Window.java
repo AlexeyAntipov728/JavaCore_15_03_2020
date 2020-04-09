@@ -42,21 +42,22 @@ public class Window extends JFrame {
                         if(isEmpty(buttons)){
                             System.out.println("Ничья");
                         }
-                        if(isVictory(buttons, imageX)) {
+                        if(isVictory(buttons)) {
                             System.out.println("WIN WIN WIN WIN");
-                            cnt++;
 
-                            JFrame alert = new JFrame("кто то победил или ничья");
+
+                            JFrame alert = new JFrame("Победил Х");
                             alert.setLocation(500, 400);
                             alert.setSize(300, 100);
                             JPanel alertPanel = new JPanel(new FlowLayout());
-                            JButton newGame = new JButton("new game");
+                            JButton newGame = new JButton("Новая игра");
                             newGame.addActionListener(a -> {
                                 this.dispose();
-
+                                new Window();
+                                cnt++;
                                 alert.dispose();
                             });
-                            JButton close = new JButton("close");
+                            JButton close = new JButton("Закрыть");
                             close.addActionListener(a -> {
                                 dispose();
                                 alert.dispose();
@@ -88,7 +89,7 @@ public class Window extends JFrame {
     }
 
 
-    public boolean isVictory(@NotNull JButton [][] buttons, ImageIcon imageX) {
+    public boolean isVictory(JButton [][] buttons) {
 
         // Счетчик комбинаций по строке
         int countRow = 0;
@@ -101,8 +102,8 @@ public class Window extends JFrame {
         // Проверка по строкам и столбцам
         for (int i = 0; i < buttons.length; i++) {
             for (int j = 0; j < buttons.length; j++) {
-                if (buttons[i][j].getIcon(imageX)) countRow++;
-                if (buttons[j][i].getIcon(imageX)) countColumn++;
+                if (buttons[i][j].getIcon() == imageX) countRow++;
+                if (buttons[j][i].getIcon() == imageX) countColumn++;
             }
             if (countRow == 3 || countColumn == 3) {
                 return true;
@@ -112,7 +113,7 @@ public class Window extends JFrame {
         }
         // Проверка по первой диагонали
         for (int i = 0, j = 0; i < buttons.length; i++) {
-            if (buttons[i][j].getIcon(imageX)) countDiagonal1++;
+            if (buttons[i][j].getIcon() == imageX) countDiagonal1++;
             j++;
         }
         if (countDiagonal1 == 3) {
@@ -120,7 +121,7 @@ public class Window extends JFrame {
         }
         // Проверка по второй диагонали
         for (int i = 0, j = 2; i < buttons.length; i++) {
-            if (buttons[i][j].getIcon(imageX)) countDiagonal2++;
+            if (buttons[i][j].getIcon() == imageX) countDiagonal2++;
             j--;
         }
         if (countDiagonal2 == 3) {
