@@ -1,5 +1,7 @@
 package HomeWork.lesson_8;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -35,12 +37,12 @@ public class Window extends JFrame {
                     copy.setIcon(imageX);
 
                     copy.setEnabled(false);
-                    cnt++;
+
                     copy.setDisabledIcon(imageX);
                         if(isEmpty(buttons)){
                             System.out.println("Ничья");
                         }
-                        if(isVictory(buttons)){
+                        if(isVictory(buttons, imageX)) {
                             System.out.println("WIN WIN WIN WIN");
                             cnt++;
 
@@ -75,7 +77,7 @@ public class Window extends JFrame {
     }
 
 
-    private boolean isEmpty(JButton [][] buttons) {
+    private boolean isEmpty(@NotNull JButton [][] buttons) {
         for (int i = 0; i < buttons.length; i++) {
             for (int j = 0; j < buttons.length; j++) {
                 if (buttons[i][j].isEnabled())
@@ -86,7 +88,7 @@ public class Window extends JFrame {
     }
 
 
-    public boolean isVictory(JButton [][] buttons) {
+    public boolean isVictory(@NotNull JButton [][] buttons, ImageIcon imageX) {
 
         // Счетчик комбинаций по строке
         int countRow = 0;
