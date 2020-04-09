@@ -6,14 +6,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Window extends JFrame {
+    public static int cnt = 0;
     public ImageIcon imageX = new ImageIcon("src/HomeWork/lesson_8/X.jpg");
     private ImageIcon imageO = new ImageIcon("src/HomeWork/lesson_8/О.jpg");
     private ImageIcon imageEmpty = new ImageIcon("src/HomeWork/lesson_8/Empty.jpg");
-    public int cnt = 0;
 
     public Window() {
 
-        setTitle("Крестини - Нолики");
+        setTitle("Крестики - Нолики");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(300, 340);
         setLocation(700, 300);
@@ -39,48 +39,17 @@ public class Window extends JFrame {
                     copy.setEnabled(false);
 
                     copy.setDisabledIcon(imageX);
-                        if(isEmpty(buttons)){
-                            System.out.println("Ничья");
-                        }
-                        if(isVictory(buttons, imageX)) {
-                            System.out.println("WIN WIN WIN WIN");
+                    if (isEmpty(buttons)) {
+//                        System.out.println("Ничья");
 
-
-                            JFrame alert = new JFrame("Победил Х");
-                            alert.setLocation(500, 400);
-                            alert.setSize(300, 100);
-                            JPanel alertPanel = new JPanel(new FlowLayout());
-                            JButton newGame = new JButton("Новая игра");
-                            newGame.addActionListener(a -> {
-                                this.dispose();
-                                new Window();
-                                cnt++;
-                                alert.dispose();
-                            });
-                            JButton close = new JButton("Закрыть");
-                            close.addActionListener(a -> {
-                                dispose();
-                                alert.dispose();
-                            });
-                            alertPanel.add(newGame);
-                            alertPanel.add(close);
-                            alert.add(alertPanel);
-                            alert.setResizable(false);
-                            alert.setVisible(true);
-                        }
-                    if(isVictory(buttons, imageO)) {
-                        System.out.println("Sad");
-
-
-                        JFrame alert = new JFrame("Победил O");
-                        alert.setLocation(500, 400);
+                        JFrame alert = new JFrame("Ничья");
+                        alert.setLocation(700, 400);
                         alert.setSize(300, 100);
                         JPanel alertPanel = new JPanel(new FlowLayout());
                         JButton newGame = new JButton("Новая игра");
                         newGame.addActionListener(a -> {
                             this.dispose();
                             new Window();
-                            cnt++;
                             alert.dispose();
                         });
                         JButton close = new JButton("Закрыть");
@@ -94,7 +63,137 @@ public class Window extends JFrame {
                         alert.setResizable(false);
                         alert.setVisible(true);
                     }
+
+                    if (isVictory(buttons, imageX)) {
+//                        System.out.println("WIN WIN WIN WIN");
+                        cnt++;
+                        for (int k = 0; k < buttons.length; k++) {
+                            for (int l = 0; l < buttons.length; l++) {
+                                buttons[k][l].setEnabled(false);
+                            }
+                        }
+//                        System.out.println("Побед" + cnt);
+
+                        JFrame alert = new JFrame("Победил Х");
+                        alert.setLocation(700, 400);
+                        alert.setSize(300, 100);
+                        JPanel alertPanel = new JPanel(new FlowLayout());
+                        JButton newGame = new JButton("Новая игра");
+                        newGame.addActionListener(a -> {
+                            this.dispose();
+                            new Window();
+                            alert.dispose();
+                        });
+                        JButton close = new JButton("Закрыть");
+                        close.addActionListener(a -> {
+                            dispose();
+                            alert.dispose();
+                        });
+                        alertPanel.add(newGame);
+                        alertPanel.add(close);
+                        alert.add(alertPanel);
+                        alert.setResizable(false);
+                        alert.setVisible(true);
+                    }
+
+                    if (isVictory(buttons, imageO)) {
+//                        System.out.println("Sad");
+                        for (int k = 0; k < buttons.length; k++) {
+                            for (int l = 0; l < buttons.length; l++) {
+                                buttons[k][l].setEnabled(false);
+                            }
+                        }
+
+                        JFrame alert = new JFrame("Победил O");
+
+                        alert.setLocation(700, 400);
+                        alert.setSize(300, 100);
+                        JPanel alertPanel = new JPanel(new FlowLayout());
+                        JButton newGame = new JButton("Новая игра");
+                        newGame.addActionListener(a -> {
+                            this.dispose();
+                            new Window();
+                            alert.dispose();
+                        });
+                        JButton close = new JButton("Закрыть");
+                        close.addActionListener(a -> {
+                            dispose();
+                            alert.dispose();
+                        });
+                        alertPanel.add(newGame);
+                        alertPanel.add(close);
+                        alert.add(alertPanel);
+                        alert.setResizable(false);
+                        alert.setVisible(true);
+                    }
+
                     movePC(buttons);
+
+                    if (isEmpty(buttons)) {
+//                        System.out.println("Ничья");
+                    }
+                    if (isVictory(buttons, imageX)) {
+//                        System.out.println("WIN WIN WIN WIN");
+
+                        for (int k = 0; k < buttons.length; k++) {
+                            for (int l = 0; l < buttons.length; l++) {
+                                buttons[k][l].setEnabled(false);
+                            }
+                        }
+//                        System.out.println("Побед" + cnt);
+
+                        JFrame alert = new JFrame("Победил Х");
+                        alert.setLocation(700, 400);
+                        alert.setSize(300, 100);
+                        JPanel alertPanel = new JPanel(new FlowLayout());
+                        JButton newGame = new JButton("Новая игра");
+                        newGame.addActionListener(a -> {
+                            this.dispose();
+                            new Window();
+                            alert.dispose();
+                        });
+                        JButton close = new JButton("Закрыть");
+                        close.addActionListener(a -> {
+                            dispose();
+                            alert.dispose();
+                        });
+                        alertPanel.add(newGame);
+                        alertPanel.add(close);
+                        alert.add(alertPanel);
+                        alert.setResizable(false);
+                        alert.setVisible(true);
+                    }
+
+                    if (isVictory(buttons, imageO)) {
+//                        System.out.println("Sad");
+                        for (int k = 0; k < buttons.length; k++) {
+                            for (int l = 0; l < buttons.length; l++) {
+                                buttons[k][l].setEnabled(false);
+                            }
+                        }
+
+                        JFrame alert = new JFrame("Победил O");
+                        alert.setLocation(500, 400);
+                        alert.setSize(300, 100);
+                        JPanel alertPanel = new JPanel(new FlowLayout());
+                        JButton newGame = new JButton("Новая игра");
+                        newGame.addActionListener(a -> {
+                            this.dispose();
+                            new Window();
+                            alert.dispose();
+                        });
+                        JButton close = new JButton("Закрыть");
+                        close.addActionListener(a -> {
+                            dispose();
+                            alert.dispose();
+                        });
+                        alertPanel.add(newGame);
+                        alertPanel.add(close);
+                        alert.add(alertPanel);
+                        alert.setResizable(false);
+                        alert.setVisible(true);
+                    }
+
                 });
                 panel.add(buttons[i][j]);
             }
@@ -103,17 +202,15 @@ public class Window extends JFrame {
         setVisible(true);
     }
 
-
-    private boolean isEmpty(@NotNull JButton [][] buttons) {
+    private boolean isEmpty(@NotNull JButton[][] buttons) {
         for (int i = 0; i < buttons.length; i++) {
             for (int j = 0; j < buttons.length; j++) {
                 if (buttons[i][j].isEnabled())
-                return false;
+                    return false;
             }
         }
         return true;
     }
-
 
     private void movePC(JButton[][] buttons) {
         for (int i = 0; i < 3; i++) {
@@ -122,14 +219,13 @@ public class Window extends JFrame {
                     buttons[i][j].setIcon(imageO);
                     buttons[i][j].setEnabled(false);
                     buttons[i][j].setDisabledIcon(imageO);
-
-                    cnt++;
                     return;
                 }
             }
         }
     }
-    private boolean isVictory(@NotNull JButton [][] buttons, ImageIcon imageX) {
+
+    private boolean isVictory(@NotNull JButton[][] buttons, ImageIcon imageX) {
         //Проверка линий по диагоналям
         boolean rightDiagonal, leftDiagonal;
         rightDiagonal = true;
@@ -150,11 +246,9 @@ public class Window extends JFrame {
                 columns &= (buttons[col][lin].getIcon() == imageX);
                 lines &= (buttons[lin][col].getIcon() == imageX);
             }
-
             if (columns || lines)
                 return true;
         }
-
         return false;
     }
 
